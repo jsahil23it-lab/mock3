@@ -1,0 +1,458 @@
+FROM eclipse-temurin:21
+
+WORKDIR /docker
+
+COPY . .
+
+RUN javac Main.java
+
+CMD ["java", "Main"]
+
+FROM node:24
+
+WORKDIR /docker
+
+COPY . /docker
+
+CMD ["node", "app.js"]
+
+Docker (Node)
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install express
+COPY . .
+EXPOSE 3000
+CMD [ "node", "app.js" ]
+
+app.js
+const express = require('express');
+const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.get('/', (req, res) => {
+    res.send(`
+        <h2>Enter your name</h2>
+        <form action="/display" method="post">
+            <input type="text" name="inputString" required>
+            <button type="submit">Submit</button>
+        </form>
+    `);
+});
+app.post('/display', (req, res) => {
+    res.send(`
+        <h2>Hello ${req.body.inputString}</h2>
+        <a href="/">Back</a>
+    `);
+});
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
+});
+
+docker build -t aman .
+docker run -p 3000:3000 aman
+
+
+
+
+
+
+Docker(Html)
+FROM nginx
+COPY index.html usr/share/nginx/html/index.html
+
+
+Docker build -t image1 .
+Docker run -d -p 8080:80 image1
+
+Docker (html png and redirection
+FROM nginx
+COPY index.html /usr/share/nginx/html
+COPY p1.png /usr/share/nginx/html/p1.png
+COPY page1.html /usr/share/nginx/html/page1.html
+
+Htmlfile
+<body bgcolor="yellow">
+    <p style="background-color: red;color: yellow;">hello</p>
+<img src="p1.png" height="200" width="100"></img>
+<a href="page1.html">click</a>
+</body>
+
+
+Docker build -t img1 .
+Docker run -d -p 8080:80 img1
+
+
+
+Docker(Java)
+FROM eclipse-temurin:17-jdk
+WORKDIR /demo
+COPY . /demo
+RUN javac demo.java
+CMD ["java", "demo"]
+
+docker build -t aman .
+docker run aman
+
+
+Docker(Python)
+FROM python:3.13
+WORKDIR /test
+COPY . /test
+CMD ["python","test.py"]
+
+docker build -t aman .
+docker run aman
+
+
+
+
+
+python basic codes 
+
+Prime Number
+n = 7
+flag = True
+if n <= 1:
+    flag = False
+for i in range(2, n):
+    if n % i == 0:
+        flag = False
+        break
+if flag:
+    print("Prime")
+else:
+    print("Not Prime")
+
+Leap Year
+year = 2024
+if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+    print("Leap Year")
+else:
+    print("Not Leap Year")
+
+Armstrong Number
+n = 153
+temp = n
+sum = 0
+while temp > 0:
+    digit = temp % 10
+    sum += digit ** 3
+    temp //= 10
+if sum == n:
+    print("Armstrong")
+else:
+    print("Not Armstrong")
+
+Fibonacci Series
+a = 0
+b = 1
+for i in range(10):
+    print(a)
+    c = a + b
+    a = b
+    b = c
+
+Palindrome Number
+n = 121
+temp = n
+rev = 0
+while temp > 0:
+    rev = rev * 10 + temp % 10
+    temp //= 10
+if rev == n:
+    print("Palindrome")
+else:
+    print("Not Palindrome")
+
+Reverse Number
+n = 1234
+rev = 0
+while n > 0:
+    rev = rev * 10 + n % 10
+    n //= 10
+print(rev)
+
+Greatest of Three Numbers
+a = 10
+b = 25
+c = 15
+if a >= b and a >= c:
+    print(a)
+elif b >= a and b >= c:
+    print(b)
+else:
+    print(c)
+
+Factorial
+n = 5
+fact = 1
+for i in range(1, n + 1):
+    fact *= i
+print(fact)
+
+GCD
+a = 12
+b = 18
+while b != 0:
+    a, b = b, a % b
+print(a)
+
+LCM
+a = 12
+b = 18
+x = a
+y = b
+while y != 0:
+    x, y = y, x % y
+gcd = x
+lcm = (a * b) // gcd
+print(lcm)
+
+Arithmetic Operations
+a = 10
+b = 5
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a % b)
+
+Swap Two Numbers
+a = 10
+b = 20
+a, b = b, a
+print(a)
+print(b)
+
+Sum of Digits
+n = 1234
+sum = 0
+while n > 0:
+    sum += n % 10
+    n //= 10
+print(sum)
+
+Count Digits
+n = 12345
+count = 0
+while n > 0:
+    count += 1
+    n //= 10
+print(count)
+
+Multiplication Table
+n = 5
+for i in range(1, 11):
+    print(n * i)
+
+Simple Interest
+p = 1000
+r = 5
+t = 2
+si = (p * r * t) / 100
+print(si)
+
+Average of Numbers
+a = 10
+b = 20
+c = 30
+avg = (a + b + c) / 3
+print(avg)
+
+Check Positive, Negative or Zero
+n = -5
+if n > 0:
+    print("Positive")
+elif n < 0:
+    print("Negative")
+else:
+    print("Zero")
+
+Sum of First N Natural Numbers
+n = 10
+sum = 0
+for i in range(1, n + 1):
+    sum += i
+print(sum)
+
+Power of a Number
+a = 2
+b = 3
+print(a ** b)
+
+Check Number is Perfect
+n = 6
+sum = 0
+for i in range(1, n):
+    if n % i == 0:
+        sum += i
+if sum == n:
+    print("Perfect")
+else:
+    print("Not Perfect")
+
+
+
+java basic codes 
+
+Here are simple Java programs (no user input, no comments):
+
+Prime Number
+public class Prime {
+    public static void main(String[] args) {
+        int n = 7;
+        boolean flag = true;
+        if (n <= 1) flag = false;
+        for (int i = 2; i < n; i++) {
+            if (n % i == 0) {
+                flag = false;
+                break;
+            }
+        }
+        if (flag)
+            System.out.println("Prime");
+        else
+            System.out.println("Not Prime");
+    }
+}
+
+Leap Year
+public class LeapYear {
+    public static void main(String[] args) {
+        int year = 2024;
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+            System.out.println("Leap Year");
+        else
+            System.out.println("Not Leap Year");
+    }
+}
+
+Armstrong Number
+public class Armstrong {
+    public static void main(String[] args) {
+        int n = 153, temp = n, sum = 0;
+        while (temp > 0) {
+            int digit = temp % 10;
+            sum += digit * digit * digit;
+            temp /= 10;
+        }
+        if (sum == n)
+            System.out.println("Armstrong");
+        else
+            System.out.println("Not Armstrong");
+    }
+}
+
+Fibonacci Series
+public class Fibonacci {
+    public static void main(String[] args) {
+        int a = 0, b = 1;
+        for (int i = 0; i < 10; i++) {
+            System.out.println(a);
+            int c = a + b;
+            a = b;
+            b = c;
+        }
+    }
+}
+
+Palindrome Number
+public class Palindrome {
+    public static void main(String[] args) {
+        int n = 121, temp = n, rev = 0;
+        while (temp > 0) {
+            rev = rev * 10 + temp % 10;
+            temp /= 10;
+        }
+        if (rev == n)
+            System.out.println("Palindrome");
+        else
+            System.out.println("Not Palindrome");
+    }
+}
+
+Reverse Number
+public class Reverse {
+    public static void main(String[] args) {
+        int n = 1234, rev = 0;
+        while (n > 0) {
+            rev = rev * 10 + n % 10;
+            n /= 10;
+        }
+        System.out.println(rev);
+    }
+}
+
+Greatest of Three Numbers
+public class Greatest {
+    public static void main(String[] args) {
+        int a = 10, b = 25, c = 15;
+        if (a >= b && a >= c)
+            System.out.println(a);
+        else if (b >= a && b >= c)
+            System.out.println(b);
+        else
+            System.out.println(c);
+    }
+}
+
+Factorial
+public class Factorial {
+    public static void main(String[] args) {
+        int n = 5;
+        int fact = 1;
+        for (int i = 1; i <= n; i++) {
+            fact *= i;
+        }
+        System.out.println(fact);
+    }
+}
+
+GCD
+public class GCD {
+    public static void main(String[] args) {
+        int a = 12, b = 18;
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        System.out.println(a);
+    }
+}
+
+LCM
+public class LCM {
+    public static void main(String[] args) {
+        int a = 12, b = 18;
+        int x = a, y = b;
+        while (y != 0) {
+            int temp = y;
+            y = x % y;
+            x = temp;
+        }
+        int gcd = x;
+        int lcm = (a * b) / gcd;
+        System.out.println(lcm);
+    }
+}
+
+Arithmetic Operations
+public class Arithmetic {
+    public static void main(String[] args) {
+        int a = 10, b = 5;
+        System.out.println(a + b);
+        System.out.println(a - b);
+        System.out.println(a * b);
+        System.out.println(a / b);
+        System.out.println(a % b);
+    }
+}
+
+
+
+
+
+
+
+
